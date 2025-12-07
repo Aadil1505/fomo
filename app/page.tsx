@@ -7,6 +7,7 @@ import { InvestmentInputs } from '@/components/investment-inputs';
 import { ResultsDisplay } from '@/components/results-display';
 import { getStockHistoricalData } from '@/lib/stock-api';
 import { calculateInvestment, generateChartData, getFunStats } from '@/lib/calculations';
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
 
 export default function Home() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
@@ -77,9 +78,12 @@ export default function Home() {
       <main className="mx-auto max-w-2xl px-6 py-16">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-3xl font-semibold text-foreground">
-            FOMO Calculator
-          </h1>
+          <div className='flex items-center justify-between'>
+            <h1 className="text-3xl font-semibold text-foreground">
+              FOMO Calculator
+            </h1>
+            <AnimatedThemeToggler/>
+          </div>
           <p className="mt-2 text-sm text-muted-foreground">
             See what your investment could have been worth
           </p>
