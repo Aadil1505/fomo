@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FOMO Calculator
+
+A simple investment calculator that helps you visualize what your stock investments could have been worth. Perfect for those "what if I had invested in..." moments.
+
+## Features
+
+- Search for any stock by ticker symbol or company name
+- Calculate historical investment returns
+- Interactive charts showing your investment growth over time
+- Fun statistics about your potential gains
+- Clean, modern interface with dark mode support
+- No authentication required
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ or Bun
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd fomo
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+bun install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 # or
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to Use
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Search for a stock**: Type a company name or ticker symbol (e.g., "Apple" or "AAPL")
+2. **Select your investment amount**: Enter how much you would have invested
+3. **Choose your dates**: Pick a start date (when you would have bought) and optionally an end date (defaults to today)
+4. **Calculate**: Click the calculate button to see your results
 
-## Learn More
+The app will show you:
+- How many shares you would have bought
+- What your investment would be worth now
+- Your total gain/loss
+- An interactive chart of your investment over time
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js 16](https://nextjs.org/) - React framework
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Radix UI](https://www.radix-ui.com/) - UI components
+- [Recharts](https://recharts.org/) - Data visualization
+- [Yahoo Finance API](https://finance.yahoo.com/) - Stock data
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Building for Production
 
-## Deploy on Vercel
+```bash
+npm run build
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT

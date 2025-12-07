@@ -29,7 +29,7 @@ export function AssetPicker({ onAssetSelect, selectedAsset }: AssetPickerProps) 
         const stockResults = await searchStocks(query);
         setResults(
           stockResults
-            .filter((stock) => stock.typeDisp === 'Equity')
+            .filter((stock) => stock.typeDisp === 'Equity' || stock.typeDisp === 'ETF')
             .map((stock: YahooSearchResult) => ({
               id: stock.symbol,
               symbol: stock.symbol,
