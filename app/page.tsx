@@ -75,7 +75,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="mx-auto max-w-2xl px-6 py-16">
+      <main className="mx-auto max-w-2xl lg:max-w-4xl xl:max-w-6xl px-6 py-16">
         {/* Header */}
         <div className="mb-12">
           <div className='flex items-center justify-between'>

@@ -77,7 +77,7 @@ export function InvestmentChart({ data, initialInvestment }: InvestmentChartProp
           Reset Zoom
         </Button>
       </div>
-      <ChartContainer config={chartConfig} className="h-[350px] w-full">
+      <ChartContainer config={chartConfig} className="h-[350px] lg:h-[450px] xl:h-[500px] w-full">
         <AreaChart
           data={data}
           margin={{
@@ -159,14 +159,14 @@ export function InvestmentChart({ data, initialInvestment }: InvestmentChartProp
           />
           <Brush
             dataKey="date"
-            height={60}
+            height={30}
             stroke="hsl(var(--primary))"
-            fill="hsl(var(--muted))"
+            // fill="hsl(var(--muted))"
             onChange={handleBrushChange}
             startIndex={zoomRange?.startIndex}
             endIndex={zoomRange?.endIndex}
-            travellerWidth={15}
-            className="[&_.recharts-brush-traveller]:cursor-ew-resize [&_.recharts-brush-traveller-rect]:fill-primary [&_.recharts-brush-traveller-rect]:stroke-primary [&_.recharts-brush-traveller-rect]:stroke-2 [&_text]:hidden"
+            travellerWidth={20}
+            className="[&_.recharts-brush-traveller]:cursor-ew-resize [&_.recharts-brush-traveller-rect]:fill-border [&_.recharts-brush-traveller-rect]:stroke-primary [&_.recharts-brush-traveller-rect]:stroke-2 [&_text]:hidden"
           >
             <AreaChart>
               <Area
