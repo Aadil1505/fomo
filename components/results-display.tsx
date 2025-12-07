@@ -30,49 +30,49 @@ export function ResultsDisplay({ result, chartData, funStats }: ResultsDisplayPr
     <div className="space-y-8">
       {/* Main Result */}
       <div className="space-y-3">
-        <div className="text-sm text-zinc-500 dark:text-zinc-500">
+        <div className="text-sm text-muted-foreground">
           Your ${result.initialInvestment.toLocaleString()} would be worth
         </div>
-        <div className="text-5xl font-semibold text-zinc-900 dark:text-zinc-50">
+        <div className="text-5xl font-semibold text-foreground">
           {/* {formatCurrency(result.currentValue)} */}
           <NumberTicker
             value={result.currentValue}
             decimalPlaces={2}
-            className="text-5xl font-semibold text-zinc-900 dark:text-zinc-50"
+            className="text-5xl font-semibold text-foreground"
             // startValue={result.currentValue*.8}
           />
         </div>
-        <div className={`text-lg ${isProfit ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
+        <div className={`text-lg ${isProfit ? 'text-green-600' : 'text-destructive'}`}>
           {formatCurrency(result.profit)} ({formatPercent(result.profitPercentage)})
         </div>
       </div>
 
       {/* Chart */}
       <div className="space-y-3">
-        <div className="text-sm text-zinc-700 dark:text-zinc-300">Growth over time</div>
+        <div className="text-sm text-foreground">Growth over time</div>
         <InvestmentChart data={chartData} initialInvestment={result.initialInvestment} />
       </div>
 
       {/* Stats Grid */}
       <div className="space-y-3">
-        <div className="text-sm text-zinc-700 dark:text-zinc-300">Details</div>
+        <div className="text-sm text-foreground">Details</div>
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-zinc-500 dark:text-zinc-500">Shares/Units</span>
-            <span className="text-zinc-900 dark:text-zinc-50">{result.shares.toFixed(4)}</span>
+            <span className="text-muted-foreground">Shares/Units</span>
+            <span className="text-foreground">{result.shares.toFixed(4)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-zinc-500 dark:text-zinc-500">Initial Price</span>
-            <span className="text-zinc-900 dark:text-zinc-50">{formatCurrency(result.initialPrice)}</span>
+            <span className="text-muted-foreground">Initial Price</span>
+            <span className="text-foreground">{formatCurrency(result.initialPrice)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-zinc-500 dark:text-zinc-500">Current Price</span>
-            <span className="text-zinc-900 dark:text-zinc-50">{formatCurrency(result.currentPrice)}</span>
+            <span className="text-muted-foreground">Current Price</span>
+            <span className="text-foreground">{formatCurrency(result.currentPrice)}</span>
           </div>
           {funStats.map((stat, index) => (
             <div key={index} className="flex justify-between">
-              <span className="text-zinc-500 dark:text-zinc-500">{stat.label}</span>
-              <span className="text-zinc-900 dark:text-zinc-50">{stat.value}</span>
+              <span className="text-muted-foreground">{stat.label}</span>
+              <span className="text-foreground">{stat.value}</span>
             </div>
           ))}
         </div>

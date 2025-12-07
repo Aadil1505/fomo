@@ -73,14 +73,14 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-background">
       <main className="mx-auto max-w-2xl px-6 py-16">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-zinc-50">
+          <h1 className="text-3xl font-semibold text-foreground">
             FOMO Calculator
           </h1>
-          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">
+          <p className="mt-2 text-sm text-muted-foreground">
             See what your investment could have been worth
           </p>
         </div>
@@ -104,14 +104,14 @@ export default function Home() {
           />
 
           {error && (
-            <div className="rounded-md bg-red-50 px-4 py-3 dark:bg-red-950/20">
-              <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            <div className="rounded-md bg-destructive/10 px-4 py-3">
+              <p className="text-sm text-destructive">{error}</p>
             </div>
           )}
 
           {isCalculating && (
             <div className="text-center">
-              <p className="text-sm text-zinc-500 dark:text-zinc-500">
+              <p className="text-sm text-muted-foreground">
                 Calculating...
               </p>
             </div>

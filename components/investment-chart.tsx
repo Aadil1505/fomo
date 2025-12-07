@@ -68,7 +68,7 @@ export function InvestmentChart({ data, initialInvestment }: InvestmentChartProp
               />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" className="stroke-zinc-200 dark:stroke-zinc-800" />
+          <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
           <XAxis
             dataKey="date"
             tickFormatter={(value) => {
@@ -78,13 +78,13 @@ export function InvestmentChart({ data, initialInvestment }: InvestmentChartProp
                 return value;
               }
             }}
-            className="text-xs text-zinc-600 dark:text-zinc-400"
+            className="text-xs text-muted-foreground"
             tickLine={false}
             axisLine={false}
           />
           <YAxis
             tickFormatter={formatCurrency}
-            className="text-xs text-zinc-600 dark:text-zinc-400"
+            className="text-xs text-muted-foreground"
             tickLine={false}
             axisLine={false}
           />

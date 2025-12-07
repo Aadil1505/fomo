@@ -58,25 +58,25 @@ export function AssetPicker({ onAssetSelect, selectedAsset }: AssetPickerProps) 
   return (
     <div className="space-y-3">
       {selectedAsset ? (
-        <div className="flex items-center justify-between rounded-md border border-zinc-200 px-3 py-2 dark:border-zinc-800">
+        <div className="flex items-center justify-between rounded-md border border-border px-3 py-2">
           <div>
-            <div className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+            <div className="text-sm font-medium text-foreground">
               {selectedAsset.symbol}
             </div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-500">
+            <div className="text-xs text-muted-foreground">
               {selectedAsset.name}
             </div>
           </div>
           <button
             onClick={() => onAssetSelect(null as any)}
-            className="text-xs text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-50"
+            className="text-xs text-muted-foreground hover:text-foreground"
           >
             Change
           </button>
         </div>
       ) : (
         <div className="relative">
-          <Label htmlFor="asset-search" className="mb-2 block text-sm text-zinc-700 dark:text-zinc-300">
+          <Label htmlFor="asset-search" className="mb-2 block text-sm text-foreground">
             Stock symbol
           </Label>
           <div className="relative">
@@ -91,18 +91,18 @@ export function AssetPicker({ onAssetSelect, selectedAsset }: AssetPickerProps) 
           </div>
 
           {results.length > 0 && (
-            <div className="absolute z-10 mt-1 w-full rounded-md border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-black">
+            <div className="absolute z-10 mt-1 w-full rounded-md border border-border bg-popover shadow-lg">
               <div className="max-h-64 overflow-y-auto py-1">
                 {results.map((asset) => (
                   <button
                     key={asset.id}
                     onClick={() => handleAssetSelect(asset)}
-                    className="w-full px-3 py-2 text-left hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                    className="w-full px-3 py-2 text-left hover:bg-accent"
                   >
-                    <div className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+                    <div className="text-sm font-medium text-foreground">
                       {asset.symbol}
                     </div>
-                    <div className="text-xs text-zinc-500 dark:text-zinc-500">
+                    <div className="text-xs text-muted-foreground">
                       {asset.name}
                     </div>
                   </button>
@@ -112,7 +112,7 @@ export function AssetPicker({ onAssetSelect, selectedAsset }: AssetPickerProps) 
           )}
 
           {isSearching && query.length > 0 && (
-            <div className="mt-2 text-xs text-zinc-500 dark:text-zinc-500">
+            <div className="mt-2 text-xs text-muted-foreground">
               Searching...
             </div>
           )}
