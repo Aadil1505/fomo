@@ -25,4 +25,5 @@ export interface InvestmentResult {
 export interface ChartDataPoint {
   date: string;
   value: number;
+  price: number;
 }

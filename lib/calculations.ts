@@ -32,6 +32,7 @@ export function generateChartData(
   return historicalPrices.map((item) => ({
     date: item.date,
     value: item.price * shares,
+    price: item.price,
   }));
 }
 

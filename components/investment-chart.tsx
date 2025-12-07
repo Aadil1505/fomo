@@ -1,14 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { ChartDataPoint } from '@/types';
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from '@/components/ui/chart';
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, Brush, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { format } from 'date-fns';
+import { Button } from '@/components/ui/button';
+import { RotateCcw } from 'lucide-react';
 
 interface InvestmentChartProps {
   data: ChartDataPoint[];
@@ -23,6 +25,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function InvestmentChart({ data, initialInvestment }: InvestmentChartProps) {
+  const [zoomRange, setZoomRange] = useState<{ startIndex: number; endIndex: number } | null>(null);
   const formatDate = (dateStr: string) => {
     try {
       return format(new Date(dateStr), 'MMM d, yyyy');
@@ -42,9 +45,39 @@ export function InvestmentChart({ data, initialInvestment }: InvestmentChartProp
 
   const isProfit = data.length > 0 && data[data.length - 1].value >= initialInvestment;
 
+  const handleResetZoom = () => {
+    setZoomRange({ startIndex: 0, endIndex: data.length - 1 });
+  };
+
+  const handleBrushChange = (range: { startIndex?: number; endIndex?: number }) => {
+    if (range.startIndex !== undefined && range.endIndex !== undefined) {
+      setZoomRange({ startIndex: range.startIndex, endIndex: range.endIndex });
+    }
+  };
+
+  const isZoomed = zoomRange !== null && !(zoomRange.startIndex === 0 && zoomRange.endIndex === data.length - 1);
+
+  const displayStartIndex = zoomRange?.startIndex ?? 0;
+  const displayEndIndex = zoomRange?.endIndex ?? data.length - 1;
+
   return (
-    <div className="w-full">
-      <ChartContainer config={chartConfig} className="h-[300px] w-full">
+    <div className="w-full space-y-3">
+      <div className="flex items-center justify-between">
+        <p className="text-xs text-muted-foreground">
+          Viewing {format(new Date(data[displayStartIndex].date), 'MMM d, yyyy')} - {format(new Date(data[displayEndIndex].date), 'MMM d, yyyy')}
+        </p>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={handleResetZoom}
+          disabled={!isZoomed}
+          className="h-7 text-xs"
+        >
+          <RotateCcw className="mr-1 size-3" />
+          Reset Zoom
+        </Button>
+      </div>
+      <ChartContainer config={chartConfig} className="h-[350px] w-full">
         <AreaChart
           data={data}
           margin={{
@@ -89,12 +122,33 @@ export function InvestmentChart({ data, initialInvestment }: InvestmentChartProp
             axisLine={false}
           />
           <ChartTooltip
-            content={
-              <ChartTooltipContent
-                labelFormatter={(label) => formatDate(label as string)}
-                formatter={(value) => formatCurrency(value as number)}
-              />
-            }
+            content={({ active, payload }) => {
+              if (!active || !payload || payload.length === 0) return null;
+
+              const data = payload[0].payload as ChartDataPoint;
+
+              return (
+                <div className="rounded-lg border border-border/50 bg-background px-3 py-2 shadow-xl">
+                  <div className="mb-2 font-medium text-foreground">
+                    {formatDate(data.date)}
+                  </div>
+                  <div className="space-y-1.5 text-sm">
+                    <div className="flex items-center justify-between gap-6">
+                      <span className="text-muted-foreground">Stock Price</span>
+                      <span className="font-mono font-medium text-foreground">
+                        {formatCurrency(data.price)}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-6">
+                      <span className="text-muted-foreground">Portfolio Value</span>
+                      <span className="font-mono font-medium text-foreground">
+                        {formatCurrency(data.value)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            }}
           />
           <Area
             type="monotone"
@@ -103,6 +157,27 @@ export function InvestmentChart({ data, initialInvestment }: InvestmentChartProp
             strokeWidth={2}
             fill="url(#colorValue)"
           />
+          <Brush
+            dataKey="date"
+            height={60}
+            stroke="hsl(var(--primary))"
+            fill="hsl(var(--muted))"
+            onChange={handleBrushChange}
+            startIndex={zoomRange?.startIndex}
+            endIndex={zoomRange?.endIndex}
+            travellerWidth={15}
+            className="[&_.recharts-brush-traveller]:cursor-ew-resize [&_.recharts-brush-traveller-rect]:fill-primary [&_.recharts-brush-traveller-rect]:stroke-primary [&_.recharts-brush-traveller-rect]:stroke-2 [&_text]:hidden"
+          >
+            <AreaChart>
+              <Area
+                type="monotone"
+                dataKey="value"
+                stroke={isProfit ? '#10b981' : '#ef4444'}
+                fill={isProfit ? '#10b981' : '#ef4444'}
+                fillOpacity={0.3}
+              />
+            </AreaChart>
+          </Brush>
         </AreaChart>
       </ChartContainer>
     </div>
