@@ -10,10 +10,19 @@ import { calculateInvestment, generateChartData, getFunStats } from '@/lib/calcu
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
 
 export default function Home() {
-  const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
-  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+  // Default values for easier testing
+  const fiveYearsAgo = new Date();
+  fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
+
+  const [selectedAsset, setSelectedAsset] = useState<Asset | null>({
+    id: 'AAPL',
+    symbol: 'AAPL',
+    name: 'Apple Inc.',
+    type: 'stock',
+  });
+  const [startDate, setStartDate] = useState<Date | undefined>(fiveYearsAgo);
   const [endDate, setEndDate] = useState<Date | undefined>(new Date());
-  const [amount, setAmount] = useState<string>('');
+  const [amount, setAmount] = useState<string>('10000');
   const [result, setResult] = useState<InvestmentResult | null>(null);
   const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
   const [funStats, setFunStats] = useState<{ label: string; value: string }[]>([]);
